@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 	pkg-config \
 	vim-common \
 	libsystemd-dev \
-	--no-install-recommends \
+	--no-install-recommends
 RUN rm -rf /var/lib/apt/lists/*
 
 # Install Go
@@ -33,3 +33,5 @@ RUN mkdir -p /usr/src/go && \
 	curl -fsSL https://golang.org/dl/go${GO_VERSION}.src.tar.gz | tar -v -C /usr/src/go -xz --strip-components=1 \
 	&& cd /usr/src/go/src \
 	&& GOOS=linux GOARCH=arm64 GOROOT_BOOTSTRAP="$(go env GOROOT)" ./make.bash
+ENV GOPATH /go
+ENV PATH /go/bin:/usr/src/go/bin:$PATH
