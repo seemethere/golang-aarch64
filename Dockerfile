@@ -30,6 +30,7 @@ RUN rm -rf /var/lib/apt/lists/*
 # We don't use the official ARMv6 released binaries as a GOROOT_BOOTSTRAP, because
 # not all ARM64 platforms support 32-bit mode. 32-bit mode is optional for ARMv8.
 ENV GO_VERSION 1.8.3
-RUN mkdir /usr/src/go && curl -fsSL https://golang.org/dl/go${GO_VERSION}.src.tar.gz | tar -v -C /usr/src/go -xz --strip-components=1 \
+RUN mkdir -p /usr/src/go && \
+	curl -fsSL https://golang.org/dl/go${GO_VERSION}.src.tar.gz | tar -v -C /usr/src/go -xz --strip-components=1 \
 	&& cd /usr/src/go/src \
 	&& GOOS=linux GOARCH=arm64 GOROOT_BOOTSTRAP="$(go env GOROOT)" ./make.bash
