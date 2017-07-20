@@ -1,7 +1,6 @@
-FROM aarch64/alpine
+FROM aarch64/ubuntu:xenial
 
-RUN apk update && apk add \
-	bash \
+RUN apt-get update && apt-get install -y \
 	golang-go \
 	apparmor \
 	bash-completion \
